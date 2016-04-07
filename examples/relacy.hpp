@@ -26,7 +26,7 @@
 	template <class T>
 	using atomic = std::atomic<T>;
 
-	#define TRACE(x) x
+	#define TRACE(x) (x)
 
 	template <class Test>
 	void run()
@@ -64,11 +64,14 @@
 	void init(lock& l, const memory_order& mo = mo_relaxed)
 	{ l.clear(mo); }
 
-	void acquire(lock& l, const memory_order& mo = mo_acquire)
+	auto acquire(lock& l, const memory_order& mo = mo_acquire)
 	{ while (l.test_and_set(mo)); }
 
 	void release(lock& l, const memory_order& mo = mo_release)
 	{ l.clear(mo); }
+
+	auto try_lock(lock& l, const memory_order& mo = mo_acquire)
+	{ return not l.test_and_set(mo); }
 #else
 	using memory_order = rl::memory_order;
 	constexpr auto mo_relaxed = rl::mo_relaxed;
@@ -101,6 +104,7 @@
 	void init(lock&, const memory_order& = mo_release) {}
 	void acquire(lock& l, const memory_order& = mo_acquire) { l.lock($); }
 	void release(lock& l, const memory_order& = mo_release) { l.unlock($); }
+	auto try_lock(lock& l, const memory_order& = mo_acquire) { return l.try_lock($); }
 #endif
 
 #endif

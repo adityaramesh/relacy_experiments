@@ -12,15 +12,15 @@ relacy. The goals of this project are the following:
 
 Basic concurrency tests:
 - Basic test with race.
-
-# Agenda
-
 - Basic test with deadlock.
 - Basic test with livelock.
 
 Basic memory tests:
 - Basic test with access to uninitialized memory.
 - Basic test with access to freed memory.
+
+# Agenda
+
 - Basic test with double free.
 - Basic test with memory leak.
 
