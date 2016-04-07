@@ -7,6 +7,7 @@ relacy. The goals of this project are the following:
 - Identify best practices for using it in both debug and release mode. Can we design a clean set of
   abstractions that allow us to use relacy in both modes, without adding too much clutter or
   otherwise reducing legibility of the source code?
+  - Yes: see [this file][examples/relacy.hpp].
 
 # Tests
 
