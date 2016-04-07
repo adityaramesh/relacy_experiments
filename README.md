@@ -18,11 +18,10 @@ Basic concurrency tests:
 Basic memory tests:
 - Basic test with access to uninitialized memory.
 - Basic test with access to freed memory.
-
-# Agenda
-
-- Basic test with double free.
 - Basic test with memory leak.
+
+# Questions
 
 - How to escape use of relacy in contexts where we know races cannot occur, in order to accelerate
   verification?
+- Just use a relaxed load to obtain a non-atomic value.

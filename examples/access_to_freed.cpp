@@ -2,19 +2,17 @@
 
 struct test : rl::test_suite<test, 1>
 {
-	atomic<atomic<unsigned>*> _u;
+	atomic<unsigned>* _u;
 	atomic<unsigned> _v;
 
 	void before()
 	{
-		TRACE(_u).store(new atomic<unsigned>, mo_relaxed);
-		delete TRACE(_u).load(mo_relaxed);
+		_u = new atomic<unsigned>;
+		delete _u;
 	}
 
 	void thread(unsigned)
-	{
-		TRACE(_v) = TRACE(*TRACE(_u).load(mo_relaxed)).load(mo_relaxed);
-	}
+	{ TRACE(_v) = TRACE(*_u).load(mo_relaxed); }
 
 	void after() {}
 	void invariant() {}
